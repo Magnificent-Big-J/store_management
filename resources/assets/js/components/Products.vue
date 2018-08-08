@@ -3,6 +3,9 @@
         <div class="card-header">
            <h4 class="text-center"> Products</h4> <button class="btn btn-primary text-right" data-toggle="modal" data-target="#exampleModal">Add Product</button>
         </div>
+        <div class="card-body">
+
+        </div>
     </div>
     
 </template>
@@ -57,7 +60,7 @@
     </div>
 </div>
 <script>
-
+    import axios from 'axios'
     export default {
         name: "products",
         data(){
@@ -73,7 +76,8 @@
                     sku:'',
                     price:0
                 },
-                errors:{}
+                errors:{},
+                editId:''
             }
         },
         methods:{
@@ -85,11 +89,24 @@
             },
             update(){
 
-            }
+            },
+            cancel()
+            {
+
+                this.edit = false
+                this.editId = ''
+                this.product = {}
+
+            },
+            getData()
+            {
+
+            },
+
 
         },
         mounted(){
-
+            this.getData();
         }
     }
 </script>
