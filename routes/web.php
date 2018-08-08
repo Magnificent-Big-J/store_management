@@ -16,9 +16,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/admin/user','FrontEndsController@login')->name('sign.in');
+Route::get('/admin/user','FrontEndsController@loginUser')->name('sign.in');
+Route::get('/admin/user','FrontEndsController@product_bid')->name('product.bid');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::resource('products','ProductsController');
-    Route::get('','');
+    //Route::get('','');
 });
