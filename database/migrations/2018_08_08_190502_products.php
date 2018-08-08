@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomerBidsTable extends Migration
+class Products extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateCustomerBidsTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_bids', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->bigInteger('amount');
-            $table->integer('product_id')->unsiged;
+            $table->string('name');
+            $table->string('description');
+            $table->bigInteger('price');
+            $table->bigInteger('sku');
             $table->timestamps();
-
-            $table->foreign('product_id')
-                ->references('id')->on('products')
-                ->onDelete('cascade');
         });
     }
 
@@ -33,6 +30,6 @@ class CreateCustomerBidsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_bids');
+        Schema::dropIfExists('products');
     }
 }

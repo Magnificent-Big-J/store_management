@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\productRequestSave;
+use App\Http\Requests\productRequestUpdate;
+use App\Products;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProductsResource;
 
 class ProductsController extends Controller
 {
@@ -13,7 +17,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Products::orderBy('id','desc')->paginate(10);
+
+        return ProductsResource::collection($products);
     }
 
     /**
@@ -32,9 +38,16 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(productRequestSave $request)
     {
-        //
+        $product = Products::create([
+            'name'=>$request->name,
+            'description'=>$request->description,
+            'sku'=>$request->sku,
+            'price'=>$request->price
+        ]);
+
+        return $product;
     }
 
     /**
@@ -66,9 +79,17 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(productRequestUpdate $request, $id)
     {
-        //
+        $product = Products::find($id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->sku = $request->sku;
+        $product->price = $request->price;
+
+        $product->save();
+
+        return $product;
     }
 
     /**
