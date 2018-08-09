@@ -9,6 +9,12 @@ use App\CustomerBids;
 
 class FrontEndsController extends Controller
 {
+    public function index()
+    {
+        $products = Products::orderBy('id','desc')->paginate(9);
+
+        return view('index',compact('products'));
+    }
     public function loginUser()
     {
         return view('auth.login');

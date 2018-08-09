@@ -87,9 +87,10 @@ class ProductsController extends Controller
         $product->sku = $request->sku;
         $product->price = $request->price;
 
-        $product->save();
-
-        return $product;
+        if($product->save())
+        {
+            return ProductsResource::collection($product);
+        }
     }
 
     /**
@@ -100,6 +101,13 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Products::findOrFail($id);
+
+        if($product->delete())
+        {
+            return $product;
+        }
+
     }
+
 }
