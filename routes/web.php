@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/','FrontEndsController@index');
 
 Route::get('/admin/user','FrontEndsController@loginUser')->name('sign.in');
+
 Auth::routes();
 
 

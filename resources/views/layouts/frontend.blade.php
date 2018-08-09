@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="../../../../favicon.ico">
 
     <title>Product Bid</title>
@@ -13,17 +14,14 @@
     <link href="{{ asset('css/noty.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nest.css') }}" rel="stylesheet">
     <link href="{{ asset('css/metroui.css') }}" rel="stylesheet">
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/noty.js') }}"></script>
-    <script src="{{ asset('js/feather.js') }}"></script>
+
 </head>
 
 <body>
 
 @include('include_files.frontendHeader')
 
-<main role="main">
+<main role="main" id="app">
 
     <section class="jumbotron text-center">
         <div class="container">
@@ -48,7 +46,10 @@
 @include('include_files.footer')
 
 
-
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/noty.js') }}"></script>
+<script src="{{ asset('js/feather.js') }}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/holder.min.js')}}"></script>
 </body>

@@ -17,6 +17,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('app-product',require('./components/Products.vue'));
+Vue.component('app-bid',require('./components/bid.vue'));
+Vue.component('app-bids',require('./components/bids.vue'));
+
 
 const app = new Vue({
     el: '#app'
