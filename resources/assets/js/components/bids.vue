@@ -1,24 +1,26 @@
 <template>
 
 
-    <div class="col-md-4" >
+   <div class="row">
+     <div class="col-md-4" v-for="product in products">
 
-      <div class="card mb-4 shadow-sm" v-for="product in products">
+       <div class="card mb-4 shadow-sm" >
 
-        <h4 class="text-center">
-          {{product.name}} R {{products.price}}
-        </h4>
-        <div class="card-body">
-          <p class="card-text">
-            {{product.description}}
-          </p>
-          <div class="d-flex justify-content-between align-items-center">
-            <app-bid :id="product.id"></app-bid>
+         <h4 class="text-center">
+           {{product.name}} R {{products.price}}
+         </h4>
+         <div class="card-body">
+           <p class="card-text">
+             {{product.description}}
+           </p>
+           <div class="d-flex justify-content-between align-items-center">
+             <app-bid :id="product.id"></app-bid>
 
-          </div>
-        </div>
-      </div>
-    </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
 
 </template>
 

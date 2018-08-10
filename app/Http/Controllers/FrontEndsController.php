@@ -21,15 +21,19 @@ class FrontEndsController extends Controller
     {
         return view('auth.login');
     }
+    public function place_bids()
+    {
+        return view('placeBids');
+    }
     public function bid(BidFormRequest $request)
     {
         $bids = new CustomerBids();
         $bids->email = $request->email;
         $bids->amount = $request->amount;
         $bids->product_id = $request->product_id;
-        $bids->save();
-
-        return ['custBid'=>$bids->amount];
+       $bids->save();
+        $bid = $this->bids($request->product_id);
+        return ['custBid'=>$bids->amount,'high'=>$bid['high'],'avg'=>$bid['avg'],'product_name'=>$bid['product_name']];
     }
     public function bids($id)
     {
@@ -50,4 +54,5 @@ class FrontEndsController extends Controller
 
         return ProductsResource::collection($products);
     }
+
 }

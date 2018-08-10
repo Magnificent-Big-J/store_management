@@ -2,7 +2,7 @@
     <div>
         <div class="btn-group">
 
-            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" @click="getBids" data-target="#exampleModal">Bid</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"  @click="getBids(id)" data-target="#exampleModal">Bid</button>
 
         </div>
 
@@ -17,11 +17,6 @@
                     </div>
                     <div class="modal-body">
 
-                        <p class="lead" >{{product_name}}</p>
-
-                        <p class="lead">Highest Bid : R{{high}}</p>
-                        <p class="lead">Average Bid: R{{avg}}</p>
-                        <p class="lead" v-if="custBid.length > 0">Your Bid: R{{custBid}}</p>
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -34,7 +29,7 @@
                                     <input type="text" class="form-control" :class="{'is-invalid':errors.amount}"  name="amount" v-model="bids.amount">
                                     <small class="text-danger"  v-if="errors.amount"  >{{errors.amount[0]}}</small>
                                 </div>
-                                <input type="text" hidden name="product_id" v-model="bids.product_id" >
+                                <input type="text" hidden  name="product_id" v-model="bids.product_id" value="id" >
                             </div>
 
 
@@ -59,17 +54,18 @@
         props:['id'],
         data(){
             return{
-                bids:{
+                bids:[{
                     email:'',
                     amount:'',
                     product_id:''
-                },
+                }],
                 errors:{},
                 url:'api/bid',
                 high:'',
                 product_name:'',
                 avg:'',
                 custBid:'',
+                temp:''
 
 
             }
@@ -77,16 +73,25 @@
         methods:{
             bid()
             {
+               if(!this.bids.product_id)
+               {
+                   this.bids.product_id = Math.floor(Math.random() * Math.floor(20));
+               }
+
+               console.log(this.bids)
                 axios.post(this.url,this.bids)
                     .then((response)=>{
-                new Noty({
-                    type: 'success',
-                    text: 'BID was placed successfully!',
-                    timeout: 3000,
-                    layout: "topCenter",
-                    theme: "nest"
-                }).show();
-                this.custBid = response.data.custBid
+
+                    let values ='Success BID <br>' + 'Product Name: '+response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg+
+                            '<br> Your Bid R' + response.data.custBid
+                    new Noty({
+                        type: 'success',
+                        text: values,
+                        timeout: 3000,
+                        layout: "topCenter",
+                        theme: "nest"
+                    }).show();
+               // this.custBid = response.data.custBid
 
 
             })
@@ -95,16 +100,24 @@
                 console.log(this.errors)
             })
             },
-           getBids()
+           getBids(ids)
             {
-                this.bids.product_id = this.id
 
-                axios.get('api/bids/' + this.id)
+                let vm = this;
+                vm.bids.product_id = ids
+
+                vm.temp = ids
+                axios.get('api/bids/' + vm.id)
                     .then((response)=>{
-                        this.product_name = response.data.product_name
-                        this.high = this.temp= response.data.high
-                        this.avg = response.data.avg
 
+                 let values = 'Product Name: '+response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg
+                new Noty({
+                    type: 'success',
+                    text: values,
+                    timeout: 3000,
+                    layout: "topCenter",
+                    theme: "nest"
+                }).show();
 
                     })
                     .catch((error)=>{
@@ -114,15 +127,16 @@
             },
             closeMe()
             {
-                this.avg = null
-                this.product_name = null;
-                this.high = null
+                this.bids = {}
+
             }
         },
-        created(){
+        created()
+        {
+           this.bids.product_id = this.id
 
+        }
 
-        },
 
 
     }

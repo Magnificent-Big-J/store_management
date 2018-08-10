@@ -15,7 +15,9 @@
                             {{$product->description}}
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <app-bid :id="{{$product->id}}"></app-bid>
+                            <div class="btn-group">
+                                <a href="{{route('bids',$product->id)}}" class="btn btn-sm btn-outline-secondary">Bid</a>
+                            </div>
 
                         </div>
                     </div>

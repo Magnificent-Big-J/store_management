@@ -53621,7 +53621,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53682,28 +53682,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "bid",
     props: ['id'],
     data: function data() {
         return {
-            bids: {
+            bids: [{
                 email: '',
                 amount: '',
                 product_id: ''
-            },
+            }],
             errors: {},
             url: 'api/bid',
             high: '',
             product_name: '',
             avg: '',
-            custBid: ''
+            custBid: '',
+            temp: ''
 
         };
     },
@@ -53712,41 +53708,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         bid: function bid() {
             var _this = this;
 
+            if (!this.bids.product_id) {
+                this.bids.product_id = Math.floor(Math.random() * Math.floor(20));
+            }
+
+            console.log(this.bids);
             axios.post(this.url, this.bids).then(function (response) {
+
+                var values = 'Success BID <br>' + 'Product Name: ' + response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg + '<br> Your Bid R' + response.data.custBid;
                 new Noty({
                     type: 'success',
-                    text: 'BID was placed successfully!',
+                    text: values,
                     timeout: 3000,
                     layout: "topCenter",
                     theme: "nest"
                 }).show();
-                _this.custBid = response.data.custBid;
+                // this.custBid = response.data.custBid
+
             }).catch(function (error) {
                 _this.errors = JSON.parse(JSON.stringify(error.response.data.errors));
                 console.log(_this.errors);
             });
         },
-        getBids: function getBids() {
+        getBids: function getBids(ids) {
             var _this2 = this;
 
-            this.bids.product_id = this.id;
+            var vm = this;
+            vm.bids.product_id = ids;
 
-            axios.get('api/bids/' + this.id).then(function (response) {
-                _this2.product_name = response.data.product_name;
-                _this2.high = _this2.temp = response.data.high;
-                _this2.avg = response.data.avg;
+            vm.temp = ids;
+            axios.get('api/bids/' + vm.id).then(function (response) {
+
+                var values = 'Product Name: ' + response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg;
+                new Noty({
+                    type: 'success',
+                    text: values,
+                    timeout: 3000,
+                    layout: "topCenter",
+                    theme: "nest"
+                }).show();
             }).catch(function (error) {
                 _this2.errors = JSON.parse(JSON.stringify(error.response.data.errors));
                 console.log(_this2.errors);
             });
         },
         closeMe: function closeMe() {
-            this.avg = null;
-            this.product_name = null;
-            this.high = null;
+            this.bids = {};
         }
     },
-    created: function created() {}
+    created: function created() {
+        this.bids.product_id = this.id;
+    }
 });
 
 /***/ }),
@@ -53768,7 +53780,11 @@ var render = function() {
             "data-toggle": "modal",
             "data-target": "#exampleModal"
           },
-          on: { click: _vm.getBids }
+          on: {
+            click: function($event) {
+              _vm.getBids(_vm.id)
+            }
+          }
         },
         [_vm._v("Bid")]
       )
@@ -53795,24 +53811,6 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("p", { staticClass: "lead" }, [
-                  _vm._v(_vm._s(_vm.product_name))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead" }, [
-                  _vm._v("Highest Bid : R" + _vm._s(_vm.high))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "lead" }, [
-                  _vm._v("Average Bid: R" + _vm._s(_vm.avg))
-                ]),
-                _vm._v(" "),
-                _vm.custBid.length > 0
-                  ? _c("p", { staticClass: "lead" }, [
-                      _vm._v("Your Bid: R" + _vm._s(_vm.custBid))
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col" }, [
                     _c("div", { staticClass: "form-group" }, [
@@ -53894,7 +53892,12 @@ var render = function() {
                           expression: "bids.product_id"
                         }
                       ],
-                      attrs: { type: "text", hidden: "", name: "product_id" },
+                      attrs: {
+                        type: "text",
+                        hidden: "",
+                        name: "product_id",
+                        value: "id"
+                      },
                       domProps: { value: _vm.bids.product_id },
                       on: {
                         input: function($event) {
@@ -54051,7 +54054,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54062,6 +54065,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -54136,32 +54141,36 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-md-4" },
+    { staticClass: "row" },
     _vm._l(_vm.products, function(product) {
-      return _c("div", { staticClass: "card mb-4 shadow-sm" }, [
-        _c("h4", { staticClass: "text-center" }, [
-          _vm._v(
-            "\n      " +
-              _vm._s(product.name) +
-              " R " +
-              _vm._s(_vm.products.price) +
-              "\n    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("\n        " + _vm._s(product.description) + "\n      ")
+      return _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "card mb-4 shadow-sm" }, [
+          _c("h4", { staticClass: "text-center" }, [
+            _vm._v(
+              "\n        " +
+                _vm._s(product.name) +
+                " R " +
+                _vm._s(_vm.products.price) +
+                "\n      "
+            )
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "d-flex justify-content-between align-items-center"
-            },
-            [_c("app-bid", { attrs: { id: product.id } })],
-            1
-          )
+          _c("div", { staticClass: "card-body" }, [
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(
+                "\n          " + _vm._s(product.description) + "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "d-flex justify-content-between align-items-center"
+              },
+              [_c("app-bid", { attrs: { id: product.id } })],
+              1
+            )
+          ])
         ])
       ])
     })

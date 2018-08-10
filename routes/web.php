@@ -12,17 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('placeBids');
 });
-
+/*
 Route::get('/','FrontEndsController@index');
-
+*/
 Route::get('/admin/user','FrontEndsController@loginUser')->name('sign.in');
 
 Auth::routes();
 
 
-Route::get('/bid','FrontEndsController@product_bid')->name('product.bid');
+Route::get('/bids','FrontEndsController@place_bids')->name('bids');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware'=>'auth'],function(){
     Route::get('list','crudsController@productList')->name('list');
