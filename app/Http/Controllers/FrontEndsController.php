@@ -25,22 +25,23 @@ class FrontEndsController extends Controller
     {
         return view('placeBids');
     }
-    public function bid(BidFormRequest $request)
+    public function bid(BidFormRequest $request,$id)
     {
         $bids = new CustomerBids();
         $bids->email = $request->email;
         $bids->amount = $request->amount;
-        $bids->product_id = $request->product_id;
+        $bids->product_id = $id;
        $bids->save();
-        $bid = $this->bids($request->product_id);
+        $bid = $this->bids($id);
+
         return ['custBid'=>$bids->amount,'high'=>$bid['high'],'avg'=>$bid['avg'],'product_name'=>$bid['product_name']];
     }
     public function bids($id)
     {
         $product = Products::find($id);
         $product_name = $product->name;
-        $highBid = DB::table('customers_bid')->where('product_id',$id)->max('amount');
-        $avgBid = DB::table('customers_bid')->where('product_id',$id)->avg('amount');
+        $highBid = DB::table('customer_bids')->where('product_id',$id)->max('amount');
+        $avgBid = DB::table('customer_bids')->where('product_id',$id)->avg('amount');
 
         $highBid = number_format($highBid,2,",",".");
         $avgBid = number_format($avgBid,2,",",".");
@@ -53,6 +54,11 @@ class FrontEndsController extends Controller
         $products = Products::orderBy('id','desc')->paginate(9);
 
         return ProductsResource::collection($products);
+    }
+    public function test($id)
+    {
+        $highBid = DB::table('customer_bids')->where('product_id',$id)->max('amount');
+        dd($highBid);
     }
 
 }

@@ -38,7 +38,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeMe" data-dismiss="modal">Close</button>
-                         <button type="button"  class="btn btn-primary" @click="bid">Place Your Bid </button>
+                         <button type="button"  class="btn btn-primary" @click="bid(id)">Place Your Bid </button>
                     </div>
 
 
@@ -71,14 +71,11 @@
             }
         },
         methods:{
-            bid()
+            bid(id)
             {
-               if(!this.bids.product_id)
-               {
-                   this.bids.product_id = Math.floor(Math.random() * Math.floor(20));
-               }
 
-               console.log(this.bids)
+                alert(id)
+               /*console.log(this.bids)
                 axios.post(this.url,this.bids)
                     .then((response)=>{
 
@@ -98,7 +95,7 @@
             .catch((error)=>{
                 this.errors = JSON.parse(JSON.stringify( error.response.data.errors ))
                 console.log(this.errors)
-            })
+            })*/
             },
            getBids(ids)
             {
@@ -133,7 +130,7 @@
         },
         created()
         {
-           this.bids.product_id = this.id
+           //this.bids.product_id = this.id
 
         }
 

@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('products','ProductsController');
-Route::post('bid','FrontEndsController@bid');
+Route::post('bid/{id}','FrontEndsController@bid');
 Route::get('bids/{id}','FrontEndsController@bids');
 Route::get('custsBids','FrontEndsController@custsBids');
 

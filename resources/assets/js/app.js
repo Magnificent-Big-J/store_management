@@ -21,6 +21,7 @@ Vue.component('app-bid',require('./components/bid.vue'));
 Vue.component('app-bids',require('./components/bids.vue'));
 
 
+
 const app = new Vue({
     el: '#app'
 });

@@ -53621,7 +53621,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53705,33 +53705,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        bid: function bid() {
-            var _this = this;
+        bid: function bid(id) {
 
-            if (!this.bids.product_id) {
-                this.bids.product_id = Math.floor(Math.random() * Math.floor(20));
-            }
-
-            console.log(this.bids);
-            axios.post(this.url, this.bids).then(function (response) {
-
-                var values = 'Success BID <br>' + 'Product Name: ' + response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg + '<br> Your Bid R' + response.data.custBid;
-                new Noty({
-                    type: 'success',
-                    text: values,
-                    timeout: 3000,
-                    layout: "topCenter",
-                    theme: "nest"
-                }).show();
-                // this.custBid = response.data.custBid
-
-            }).catch(function (error) {
-                _this.errors = JSON.parse(JSON.stringify(error.response.data.errors));
-                console.log(_this.errors);
-            });
+            alert(id);
+            /*console.log(this.bids)
+             axios.post(this.url,this.bids)
+                 .then((response)=>{
+                  let values ='Success BID <br>' + 'Product Name: '+response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg+
+                         '<br> Your Bid R' + response.data.custBid
+                 new Noty({
+                     type: 'success',
+                     text: values,
+                     timeout: 3000,
+                     layout: "topCenter",
+                     theme: "nest"
+                 }).show();
+            // this.custBid = response.data.custBid
+            })
+            .catch((error)=>{
+             this.errors = JSON.parse(JSON.stringify( error.response.data.errors ))
+             console.log(this.errors)
+            })*/
         },
         getBids: function getBids(ids) {
-            var _this2 = this;
+            var _this = this;
 
             var vm = this;
             vm.bids.product_id = ids;
@@ -53748,8 +53745,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     theme: "nest"
                 }).show();
             }).catch(function (error) {
-                _this2.errors = JSON.parse(JSON.stringify(error.response.data.errors));
-                console.log(_this2.errors);
+                _this.errors = JSON.parse(JSON.stringify(error.response.data.errors));
+                console.log(_this.errors);
             });
         },
         closeMe: function closeMe() {
@@ -53757,7 +53754,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        this.bids.product_id = this.id;
+        //this.bids.product_id = this.id
+
     }
 });
 
@@ -53928,7 +53926,11 @@ var render = function() {
                   {
                     staticClass: "btn btn-primary",
                     attrs: { type: "button" },
-                    on: { click: _vm.bid }
+                    on: {
+                      click: function($event) {
+                        _vm.bid(_vm.id)
+                      }
+                    }
                   },
                   [_vm._v("Place Your Bid ")]
                 )
@@ -54054,7 +54056,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54091,14 +54093,83 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "bids",
+
     data: function data() {
         return {
             products: {},
             url: 'api/custsBids',
-            pagination: []
+            pagination: [],
+            bids: {
+                email: '',
+                amount: ''
+            },
+            errors: {},
+            urls: 'api/bid',
+            high: '',
+            product_name: '',
+            avg: '',
+            custBid: '',
+            temp: '',
+            id: ''
         };
     },
 
@@ -54123,6 +54194,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vm.makePagination(response.data.meta, response.data.links);
                 console.log(_this.products);
             });
+        },
+        bid: function bid() {
+            var _this2 = this;
+
+            axios.post(this.urls + '/' + this.id, this.bids).then(function (response) {
+
+                var values = 'Success BID <br>' + 'Product Name: ' + response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg + '<br> Your Bid R' + response.data.custBid;
+                new Noty({
+                    type: 'success',
+                    text: values,
+                    timeout: 3000,
+                    layout: "topCenter",
+                    theme: "nest"
+                }).show();
+                // this.custBid = response.data.custBid
+
+            }).catch(function (error) {
+                _this2.errors = JSON.parse(JSON.stringify(error.response.data.errors));
+                console.log(_this2.errors);
+            });
+        },
+        getBids: function getBids(ids) {
+            var _this3 = this;
+
+            this.id = ids;
+
+            axios.get('api/bids/' + ids).then(function (response) {
+
+                var values = 'Product Name: ' + response.data.product_name + '<br>' + 'Highest Bid R' + response.data.high + '<br>' + 'Average Bid R' + response.data.avg;
+                new Noty({
+                    type: 'success',
+                    text: values,
+                    timeout: 3000,
+                    layout: "topCenter",
+                    theme: "nest"
+                }).show();
+            }).catch(function (error) {
+                _this3.errors = JSON.parse(JSON.stringify(error.response.data.errors));
+                console.log(_this3.errors);
+            });
+        },
+        closeMe: function closeMe() {
+            this.bids = {};
+            this.errors = {};
         }
     },
     mounted: function mounted() {
@@ -54139,44 +54254,277 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    _vm._l(_vm.products, function(product) {
-      return _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "card mb-4 shadow-sm" }, [
-          _c("h4", { staticClass: "text-center" }, [
-            _vm._v(
-              "\n        " +
-                _vm._s(product.name) +
-                " R " +
-                _vm._s(_vm.products.price) +
-                "\n      "
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _vm._l(_vm.products, function(product) {
+          return _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "card mb-4 shadow-sm" }, [
+              _c("img", { attrs: { src: "images/default.jpg", alt: "" } }),
+              _vm._v(" "),
+              _c("h4", { staticClass: "text-center" }, [
+                _vm._v(
+                  "\r\n           " +
+                    _vm._s(product.name) +
+                    " R " +
+                    _vm._s(_vm.products.price) +
+                    "\r\n         "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(
+                    "\r\n             " +
+                      _vm._s(product.description) +
+                      "\r\n           "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-flex justify-content-between align-items-center"
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-outline-secondary",
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#exampleModal"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.getBids(product.id)
+                          }
+                        }
+                      },
+                      [_vm._v("BID")]
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "email" } }, [
+                            _vm._v("Email")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.bids.email,
+                                expression: "bids.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: { "is-invalid": _vm.errors.email },
+                            attrs: { type: "email", name: "email" },
+                            domProps: { value: _vm.bids.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.bids, "email", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.email
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.email[0]))
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "price" } }, [
+                            _vm._v("Product Price")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.bids.amount,
+                                expression: "bids.amount"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: { "is-invalid": _vm.errors.amount },
+                            attrs: { type: "text", name: "amount" },
+                            domProps: { value: _vm.bids.amount },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.bids,
+                                  "amount",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.amount
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(_vm._s(_vm.errors.amount[0]))
+                              ])
+                            : _vm._e()
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: { click: _vm.closeMe }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.bid }
+                      },
+                      [_vm._v("Place Your Bid ")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "row text-center" }, [
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.prev_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.getData(_vm.pagination.prev_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item disabled" }, [
+            _c(
+              "a",
+              { staticClass: "page-link text-dark", attrs: { href: "#" } },
+              [
+                _vm._v(
+                  " Page " +
+                    _vm._s(_vm.pagination.current_page) +
+                    " of " +
+                    _vm._s(_vm.pagination.last_page)
+                )
+              ]
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(
-                "\n          " + _vm._s(product.description) + "\n        "
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: [{ disabled: !_vm.pagination.next_page_url }]
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.getData(_vm.pagination.next_page_url)
+                    }
+                  }
+                },
+                [_vm._v("Next")]
               )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "d-flex justify-content-between align-items-center"
-              },
-              [_c("app-bid", { attrs: { id: product.id } })],
-              1
-            )
-          ])
+            ]
+          )
         ])
       ])
-    })
-  )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("BID ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
